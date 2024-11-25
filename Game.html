@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego de Adivinanza</title>
+  <style>
+    /* Fondo de la página con imagen */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: url('https://i.pinimg.com/736x/6c/3f/63/6c3f63dbeca4fff8c8980011d89055e8.jpg') no-repeat center center/cover;
+      background-size: cover;
+      color: white;
+    }
+
+    /* Contenedor principal */
+    .container {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5); /* Fondo oscuro para contraste */
+      padding: 40px;
+      border-radius: 10px;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 60%;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #F9A0B7; /* Rosa pálido */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #E9814A; /* Rosa más oscuro */
+    }
+
+    #result {
+      font-size: 20px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>¡Adivina la palabra secreta!</h1>
+    <p>Ingresa una palabra y recibe una pista.</p>
+    <input type="text" id="guess" placeholder="Escribe tu palabra">
+    <button onclick="checkWord()">Enviar</button>
+    <button onclick="resetGame()">Reiniciar</button>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    // Lista de palabras secretas relacionadas con la MFA
+    const words = [
+      "contraseña",
+      "token",
+      "autenticación",
+      "seguridad",
+      "verificación",
+      "biometría",
+      "código",
+      "desafío",
+      "protección",
+      "cifrado"
+    ];
+
+    // Seleccionar una palabra secreta al azar de la lista
+    let secretWord = words[Math.floor(Math.random() * words.length)];
+
+    // Función para verificar la palabra ingresada
+    function checkWord() {
+      const guess = document.getElementById("guess").value.toLowerCase().trim();
+      let feedback = "";
+
+      if (guess === secretWord) {
+        feedback = "¡Felicidades, adivinaste la palabra!";
+      } else if (words.includes(guess)) {
+        feedback = "¡Caliente! Estás cerca, pero esa no es la palabra secreta.";
+      } else {
+        feedback = "Muy frío. Lejos de la palabra.";
+      }
+
+      document.getElementById("result").textContent = feedback;
+    }
+
+    // Función para reiniciar el juego
+    function resetGame() {
+      secretWord = words[Math.floor(Math.random() * words.length)];
+      document.getElementById("guess").value = "";
+      document.getElementById("result").textContent = "";
+    }
+  </script>
+</body>
+</html>
